@@ -1,0 +1,24 @@
+[OSEv3:children]
+masters
+nodes
+etcd
+
+[OSEv3:vars]
+ansible_ssh_user=root
+openshift_deployment_type=origin
+openshift_cluster_monitoring_operator_install=false
+openshift_metrics_install_metrics=false
+openshift_logging_install_logging=false
+openshift_enable_olm=false
+openshift_disable_check=disk_availability,memory_availability
+
+[masters]
+master.okd.os openshift_public_ip='10.0.0.10' openshift_public_hostname='master.okd.os'
+
+[etcd]
+master.okd.os
+
+[nodes]
+master.okd.os openshift_node_group_name='node-config-master-infra' openshift_public_ip='10.0.0.10' openshift_public_hostname='master.okd.os'
+node1.okd.os openshift_node_group_name='node-config-compute' openshift_public_ip='10.0.0.20' openshift_public_hostname='node1.okd.os'
+node2.okd.os openshift_node_group_name='node-config-compute' openshift_public_ip='10.0.0.30' openshift_public_hostname='node2.okd.os'
