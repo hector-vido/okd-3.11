@@ -52,7 +52,8 @@ Vagrant.configure("2") do |config|
     #for X in $(seq 1 9999); do sed -i 's#10.0.2.15#10.0.0.10#g' /etc/etcd/etcd.conf; sleep 1; done
     mkdir -p /root/.ssh
     cp /vagrant/files/key.pub /root/.ssh/authorized_keys
-    yum install -y curl vim device-mapper-persistent-data lvm2 epel-release wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct docker-1.13.1
+    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    yum install -y curl vim device-mapper-persistent-data lvm2 epel-release wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct docker-ce
     HOSTS="$(head -n3 /etc/hosts)"
     echo -e "$HOSTS" > /etc/hosts
     echo -e '10.0.0.10 master.okd.os\n10.0.0.20 node1.okd.os\n10.0.0.30 node2.okd.os' >> /etc/hosts
