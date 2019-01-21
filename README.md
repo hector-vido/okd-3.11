@@ -33,8 +33,8 @@ Each machine in the *Vagrantfile* uses 2 cpu cores. The master is configured to 
 After provisioning step, enter in the master via ssh, and run the two playbooks responsible to check and deploy the OKD:
 
     vagrant ssh master
-    ansible-playbook /root/openshift-ansible/playbooks/prerequisites.yml
-    ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
+    sudo ansible-playbook /root/openshift-ansible/playbooks/prerequisites.yml
+    sudo ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
 
 # Know issues
 
