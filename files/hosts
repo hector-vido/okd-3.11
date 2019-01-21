@@ -20,6 +20,6 @@ master.okd.os openshift_public_ip='192.168.1.10' openshift_public_hostname='mast
 master.okd.os
 
 [nodes]
-master.okd.os openshift_node_group_name='node-config-master-infra' openshift_public_ip='192.168.1.10' openshift_public_hostname='master.okd.os'
-node1.okd.os openshift_node_group_name='node-config-compute' openshift_public_ip='192.168.1.20' openshift_public_hostname='node1.okd.os'
-node2.okd.os openshift_node_group_name='node-config-compute' openshift_public_ip='192.168.1.30' openshift_public_hostname='node2.okd.os'
+master.okd.os openshift_node_group_name='node-config-master-infra' openshift_ip='192.168.1.10' openshift_public_ip='192.168.1.10' openshift_public_hostname='master.okd.os'
+node1.okd.os openshift_node_group_name='node-config-compute' openshift_ip='192.168.1.20' openshift_public_ip='192.168.1.20' openshift_public_hostname='node1.okd.os'
+node2.okd.os openshift_node_group_name='node-config-compute' openshift_ip='192.168.1.30' openshift_public_ip='192.168.1.30' openshift_public_hostname='node2.okd.os'
