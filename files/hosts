@@ -10,7 +10,7 @@ openshift_cluster_monitoring_operator_install=false
 openshift_metrics_install_metrics=false
 openshift_logging_install_logging=false
 openshift_enable_olm=false
-openshift_disable_check=disk_availability,memory_availability
+openshift_disable_check=disk_availability,memory_availability,docker_storage
 openshift_ip='192.168.1.10'
 
 [masters]
