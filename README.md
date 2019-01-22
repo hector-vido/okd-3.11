@@ -11,7 +11,7 @@ The ansible on master machine is preconfigured with the keys and the hosts to ac
 NAT
 ---
 
-Some configurations on the inventory */etc/ansible/hosts* was added to overcome the problems with default NAT interface that vagrant creates:
+Some configurations on the inventory */etc/ansible/hosts* was added to overcome problems with default NAT interface that vagrant creates:
 
  - openshift_ip
  - openshift_public_ip
@@ -23,19 +23,21 @@ Disabled Services
  - openshift_metrics_install_metrics
  - openshift_logging_install_logging
  - openshift_enable_olm
+ - template_service_broker_install
 
 # Requirements
 
-Each machine in the *Vagrantfile* uses 2 cpu cores. The master is configured to use 2GiB of RAM and the node ones 1GiB.
+Each machine in *Vagrantfile* uses 2 cpu cores. The master is configured to use 2GiB of RAM and the node ones 1GiB.
 
 # Installation
 
-After provisioning step, enter in the master via ssh, and run the two playbooks responsible to check and deploy the OKD:
+After provisioning step, enter in the master via ssh, and run the two playbooks responsible to prepare the nodes and deploy OKD:
 
     vagrant ssh master
     sudo ansible-playbook /root/openshift-ansible/playbooks/prerequisites.yml
     sudo ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
 
-# Know issues
+If you want to access the *webconsole* you can add the hostname and ip address on */etc/hosts*:
 
- - The "Service Catalog Install" fails in the step 'TASK [template_service_broker : Apply template file]' -> Unable to connect to the server: unexpected EOF; some request body already written. The connection to the server master.okd.os:8443 was refused - did you specify the right host or port?
+    sudo su
+    echo '192.168.1.10 master.okd.os' >> /etc/hosts
