@@ -23,6 +23,7 @@ Disabled Services
  - openshift_metrics_install_metrics
  - openshift_logging_install_logging
  - openshift_enable_olm
+ - ansible_service_broker_install
  - template_service_broker_install
 
 # Requirements
