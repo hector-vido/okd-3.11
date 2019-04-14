@@ -28,6 +28,7 @@ if [ "$HOSTNAME" == "master.okd.os" ]; then
     docker pull docker.io/openshift/origin-control-plane:v3.11
     docker pull quay.io/coreos/etcd:v3.2.22
     sed -i -e "s/^enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo
+	yum install -y java python-passlib
     yum -y --enablerepo=epel install ansible pyOpenSSL
     cp /vagrant/files/hosts /etc/ansible/hosts
     cp /vagrant/files/key /root/.ssh/id_rsa; chmod 400 /root/.ssh/id_rsa 
