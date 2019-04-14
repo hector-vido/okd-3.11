@@ -40,7 +40,7 @@ Once the volumes as exposed from storage server, you can create a PersistentVolu
       accessModes:
         - ReadWriteMany
       nfs:
-        server: 192.168.1.40setsebool -P virt_use_nfs 1
+        server: 192.168.1.40
         path: "/volumes/v1"
 
 PersistentVolumeClaim
