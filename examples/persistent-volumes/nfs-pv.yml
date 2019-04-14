@@ -1,0 +1,65 @@
+apiVersion: v1                                                                                                                                                          
+kind: PersistentVolume                                                                                                                                                  
+metadata:
+  name: nfs-v1
+spec:
+  capacity:
+    storage: 256Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.40
+    path: "/volumes/v1"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-v2
+spec:
+  capacity:
+    storage: 256Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.40
+    path: "/volumes/v2"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-v3
+spec:
+  capacity:
+    storage: 512Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.40
+    path: "/volumes/v3"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-v4
+spec:
+  capacity:
+    storage: 512Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.40
+    path: "/volumes/v4"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-v5
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.40
+    path: "/volumes/v5"
+---

@@ -1,16 +1,29 @@
 #!/bin/bash
+
 mkdir -p /root/.ssh
 cp /vagrant/files/key.pub /root/.ssh/authorized_keys
-yum install -y curl vim device-mapper-persistent-data lvm2 epel-release wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct docker-1.13.1-75.git8633870.el7.centos
+
 HOSTS="$(head -n3 /etc/hosts)"
 echo -e "$HOSTS" > /etc/hosts
-echo -e '192.168.1.10 master.okd.os\n192.168.1.20 node1.okd.os\n192.168.1.30 node2.okd.os' > /etc/hosts
+cat >> /etc/hosts <<EOF
+192.168.1.10 master.okd.os
+192.168.1.20 node1.okd.os
+192.168.1.30 node2.okd.os
+192.168.1.40 storage.okd.os
+EOF
+
+if [ "$HOSTNAME" == "storage.okd.os" ]; then
+	exit
+fi
+
+yum install -y curl vim device-mapper-persistent-data lvm2 epel-release wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct docker-1.13.1-75.git8633870.el7.centos
 systemctl start docker
 docker pull docker.io/cockpit/kubernetes
 docker pull docker.io/openshift/origin-deployer:v3.11
 docker pull docker.io/openshift/origin-docker-registry:v3.11
 docker pull docker.io/openshift/origin-haproxy-router:v3.11
 docker pull docker.io/openshift/origin-pod:v3.11
+
 if [ "$HOSTNAME" == "master.okd.os" ]; then
     docker pull docker.io/openshift/origin-control-plane:v3.11
     docker pull quay.io/coreos/etcd:v3.2.22
@@ -24,4 +37,6 @@ if [ "$HOSTNAME" == "master.okd.os" ]; then
     git clone https://github.com/openshift/openshift-ansible /root/openshift-ansible
     cd /root/openshift-ansible
     git checkout release-3.11
+    ansible-playbook /root/openshift-ansible/playbooks/prerequisites.yml
+    ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
 fi
