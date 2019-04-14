@@ -8,10 +8,10 @@ ansible_ssh_user=root
 openshift_deployment_type=origin
 openshift_enable_olm=false
 openshift_cluster_monitoring_operator_install=false
-openshift_metrics_install_metrics=false
 openshift_logging_install_logging=false
 ansible_service_broker_install=false
 template_service_broker_install=false
+openshift_metrics_install_metrics=true
 openshift_disable_check=disk_availability,memory_availability,docker_storage
 
 [masters]
