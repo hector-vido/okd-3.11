@@ -11,16 +11,16 @@ openshift_cluster_monitoring_operator_install=false
 openshift_logging_install_logging=false
 ansible_service_broker_install=false
 template_service_broker_install=false
-openshift_metrics_install_metrics=true
+openshift_metrics_install_metrics=false
 openshift_disable_check=disk_availability,memory_availability,docker_storage
 
 [masters]
 master.okd.os openshift_public_ip='192.168.1.10' openshift_public_hostname='master.okd.os'
 
 [etcd]
-master.okd.os
+master.okd.os etcd_ip='192.168.1.10'
 
 [nodes]
-master.okd.os openshift_node_group_name='node-config-master-infra' openshift_ip='192.168.1.10' openshift_public_ip='192.168.1.10' openshift_public_hostname='master.okd.os'
-node1.okd.os openshift_node_group_name='node-config-compute' openshift_ip='192.168.1.20' openshift_public_ip='192.168.1.20' openshift_public_hostname='node1.okd.os'
-node2.okd.os openshift_node_group_name='node-config-compute' openshift_ip='192.168.1.30' openshift_public_ip='192.168.1.30' openshift_public_hostname='node2.okd.os'
+master.okd.os openshift_node_group_name='node-config-master-infra' openshift_public_ip='192.168.1.10' openshift_public_hostname='master.okd.os'
+node1.okd.os openshift_node_group_name='node-config-compute' openshift_public_ip='192.168.1.20' openshift_public_hostname='node1.okd.os'
+node2.okd.os openshift_node_group_name='node-config-compute' openshift_public_ip='192.168.1.30' openshift_public_hostname='node2.okd.os'
