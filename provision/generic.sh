@@ -32,6 +32,7 @@ if [ "$HOSTNAME" == "master.okd.os" ]; then
 	yum install -y java python-passlib pyOpenSSL PyYAML python-jinja2 python-paramiko python-setuptools python2-cryptography sshpass
 	rpm -i https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.5.7-1.el7.ans.noarch.rpm
     cp /vagrant/files/hosts /etc/ansible/hosts
+    cp /vagrant/files/ansible.cfg /etc/ansible/ansible.cfg
     cp /vagrant/files/key /root/.ssh/id_rsa; chmod 400 /root/.ssh/id_rsa 
     cp /vagrant/files/key.pub /root/.ssh/id_rsa.pub
     sed -i -e "s/#host_key_checking/host_key_checking/" /etc/ansible/ansible.cfg
