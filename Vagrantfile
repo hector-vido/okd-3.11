@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     srv.vm.hostname = "node1.okd.os"
     srv.vm.network "private_network", ip: "192.168.1.20"
     srv.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "2048"
       vb.cpus = "2"
     end
   end
@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
     srv.vm.hostname = "node2.okd.os"
     srv.vm.network "private_network", ip: "192.168.1.30"
     srv.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "2048"
       vb.cpus = "2"
     end
   end
