@@ -6,10 +6,10 @@ cp /vagrant/files/key.pub /root/.ssh/authorized_keys
 HOSTS="$(head -n3 /etc/hosts)"
 echo -e "$HOSTS" > /etc/hosts
 cat >> /etc/hosts <<EOF
-192.168.1.10 master.okd.os
-192.168.1.20 node1.okd.os
-192.168.1.30 node2.okd.os
-192.168.1.40 storage.okd.os
+27.11.90.10 master.okd.os
+27.11.90.20 node1.okd.os
+27.11.90.30 node2.okd.os
+27.11.90.40 storage.okd.os
 EOF
 
 if [ "$HOSTNAME" == "storage.okd.os" ]; then
