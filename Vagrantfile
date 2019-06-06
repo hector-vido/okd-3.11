@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
     srv.vm.hostname = "master.okd.os"
     srv.vm.network "private_network", ip: "27.11.90.10"
     srv.vm.provider "virtualbox" do |vb|
-      vb.memory = "4096"
+      vb.memory = "6144"
       vb.cpus = "4"
     end
   end
