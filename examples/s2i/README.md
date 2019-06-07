@@ -68,11 +68,11 @@ RUN yum install -y epel-release && yum install -y lighttpd && yum clean all -y
 # TODO (optional): Copy the builder files into /opt/app-root
 # COPY ./<builder_folder>/ /opt/app-root/
 # Defines the location of the S2I
-LABEL io.openshift.s2i.scripts-url=image:///usr/local/s2i
+LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
 
 # TODO: Copy the S2I scripts to /usr/libexec/s2i, since openshift/base-centos7 image
 # sets io.openshift.s2i.scripts-url label that way, or update that label
-COPY ./s2i/bin/ /usr/local/s2i
+COPY ./s2i/bin/ /usr/libexec/s2i
 
 # Copy the lighttpd configuration file
 COPY ./etc/ /opt/app-root/etc
