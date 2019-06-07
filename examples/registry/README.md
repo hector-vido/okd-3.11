@@ -4,6 +4,8 @@ Para se logar no registry interno do OKD e conseguir subir novas imagens sem pre
 
 
 ```
+oc login -u system:admin
+oc adm policy add-cluster-role-to-user cluster-admin user
 oc login -u user
 ```
 
