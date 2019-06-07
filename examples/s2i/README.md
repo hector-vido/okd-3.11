@@ -141,10 +141,10 @@ To use it, install S2I: https://github.com/openshift/source-to-image
 
 Sample invocation:
 
-s2i build https://github.com/soltysh/sti-lighttpd.git --context-dir=test/test-app/ lighttpd-centos7 sample-app
+s2i build https://github.com/hector-vido/sti-lighttpd.git lighttpd-centos7 lighttpd-ex
 
 You can then run the resulting image via:
-docker run -p 8080:8080 sample-app
+docker run -p 8080:8080 lighttpd-ex
 EOF
 ```
 
