@@ -175,13 +175,12 @@ Feito isso, construa a aplicação com o **make**, que internamente está chaman
 
 ```
 make
-
 ```
 
 Para ver a execução do script **usage**, basta rodar a imagem:
 
 ```
-[root@master s2i-lighttpd]# docker run lighttpd-centos7
+docker run lighttpd-centos7
 
 This is the lighttpd-centos7 S2I image:
 To use it, install S2I: https://github.com/openshift/source-to-image
