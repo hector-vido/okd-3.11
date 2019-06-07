@@ -5,17 +5,19 @@ Volumes is a way that containers can share data between pods. Persistent Volumes
 
 Once you had provisioned your OKD cluster, you can go to the **storage** machine and create some NFS mount points:
 
-    mkdir -p /volumes/v{1,2,3,4,5}
+	mkdir -p /volumes/v{1,2,3,4,5}
+	chmod 0700 /volumes/v{1,2,3,4,5}
+	chown nfsnobody: /volumes/v{1,2,3,4,5}
     cat > /etc/exports <<EOF
-    /volumes/v1 192.168.1.0/255.255.255.0(rw,no_root_squash,no_subtree_check)
-    /volumes/v2 192.168.1.0/255.255.255.0(rw,no_root_squash,no_subtree_check)
-    /volumes/v3 192.168.1.0/255.255.255.0(rw,no_root_squash,no_subtree_check)
-    /volumes/v4 192.168.1.0/255.255.255.0(rw,no_root_squash,no_subtree_check)
-    /volumes/v5 192.168.1.0/255.255.255.0(rw,no_root_squash,no_subtree_check)
+	/volumes/v1 27.11.90.0/255.255.255.0(rw,all_squash)
+	/volumes/v2 27.11.90.0/255.255.255.0(rw,all_squash)
+	/volumes/v3 27.11.90.0/255.255.255.0(rw,all_squash)
+	/volumes/v4 27.11.90.0/255.255.255.0(rw,all_squash)
+	/volumes/v5 27.11.90.0/255.255.255.0(rw,all_squash)
     EOF
-    exportfs -a
-    systemctl start nfs-server
-    systemctl enable nfs-server
+	exportfs -a
+	systemctl start rpcbind nfs-server
+	systemctl enable rpcbind nfs-server
 
 #### Read and Write
 
@@ -40,7 +42,7 @@ Once the volumes as exposed from storage server, you can create a PersistentVolu
       accessModes:
         - ReadWriteMany
       nfs:
-        server: 192.168.1.40
+        server: 27.11.90.40
         path: "/volumes/v1"
 
 PersistentVolumeClaim

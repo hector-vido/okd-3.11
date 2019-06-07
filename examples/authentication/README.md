@@ -1,30 +1,47 @@
 OKD - Authentication
 ====================
 
-OKD suport a lot of authentication methods such as LDAP, HTPasswd and the default on AllowAll.
-By default, any user and any password will grant access to the OKD cluster.
+OKD suport a lot of authentication methods such as LDAP, HTPasswd, Keystone and so on.
+By default OKD will grant access to any user and any password because **AllowAllPasswordIdentityProvider** is probably enabled.
 
-Just to simplify and don't allow these type of access, login in [https://master.okd.os:8443](https://master.okd.os:8443) and choose an username and a password.
+HTPasswd
+--------
 
-You can see the user you created with:
+Just to simplify and create the simplest secure authentication, login through ssh in [master.okd.os:8443](master.okd.os:8443) and create an **htpasswd** file with an user and a password:
 
-    oc get user
-    oc get identity
+    htpasswd -bc /etc/origin/master/htpasswd okd pass123
 
-Now, go to the **master-config.yml** in */etc/origin/master/master-config.yaml* and change the **mappingMethod** from **claim** to **lookup**:
+Verify if the password match the user you choose:
+
+    htpasswd -v /etc/origin/master/htpasswd okd
+
+Now, go to the **master-config.yml** in */etc/origin/master/master-config.yaml* and change the only **identityProvider**:
 
     ...
       identityProviders:
       - challenge: true
         login: true
         mappingMethod: claim
+        name: allow_all
+        provider:
+          apiVersion: v1
+          kind: AllowAllPasswordIdentityProvider
     ...
-      identityProviders:
-      - challenge: true
-        login: true
-        mappingMethod: lookup
+      - name: htpasswd
+        challenge: true 
+        login: true 
+        mappingMethod: claim 
+        provider:
+          apiVersion: v1
+          kind: HTPasswdPasswordIdentityProvider
+          file: /etc/origin/master/htpasswd 
 
 Restar the master api and controllers to apply the new configuration:
 
     /usr/local/bin/master-restart api
     /usr/local/bin/master-restart controllers
+
+Try login trough the **webconsole** or **cli** and after that you can see the user you created with:
+
+    oc get user
+    oc get identity
