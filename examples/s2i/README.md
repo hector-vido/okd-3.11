@@ -8,11 +8,14 @@ A principal vantagem é prevenir que os desenvolvedores utilizem comandos de sis
 
 Baixe o binário **s2i** em [https://github.com/openshift/source-to-image/releases/tag/v1.1.14](https://github.com/openshift/source-to-image/releases/tag/v1.1.14) e instale em sua máquina:
 
+## Primeiro
+
 ```
 wget https://github.com/openshift/source-to-image/releases/download/v1.1.14/source-to-image-v1.1.14-874754de-linux-amd64.tar.gz
 tar -xzf source-to-image-v1.1.14-874754de-linux-amd64.tar.gz
 mv s2i /usr/bin/
 ```
+## Segundo
 
 O seguinte comando criará uma pasta chamada **s2i-lighttpd** que ao final criará uma imagem chamada **lighttpd-centos7**:
 
@@ -40,6 +43,8 @@ s2i-lighttpd/test/test-app/index.html
 s2i-lighttpd/test/run
 s2i-lighttpd/Makefile
 ```
+
+## Terceiro
 
 Modifique o Dockerfile para que fique semelhante ao conteúdo a seguir:
 
@@ -90,6 +95,8 @@ EXPOSE 8080
 CMD ["/usr/libexec/s2i/usage"]
 ```
 
+## Quarto
+
 Modifique o arquivo responsável pela construção da aplicação:
 
 **s2i/bin/assemble**
@@ -112,6 +119,8 @@ echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
 ```
 
+## Quinto
+
 Modifique o arquivo responsável por iniciar a aplicação:
 
 **s2i/bin/run**
@@ -127,6 +136,8 @@ Modifique o arquivo responsável por iniciar a aplicação:
 
 exec lighttpd -D -f /opt/app-root/etc/lighttpd.conf
 ```
+
+## Sexto
 
 Dentro do arquivo *usage* colocaremos informações de como utilizar a imagem:
 
@@ -147,6 +158,8 @@ You can then run the resulting image via:
 docker run -p 8080:8080 lighttpd-ex
 EOF
 ```
+
+## Setimo
 
 Crie uma pasta **etc** e coloque dentro dela o arquivo de configuração do *lighttpd*:
 
@@ -170,12 +183,16 @@ mimetype.assign = (
 )
 ```
 
+## Oitavo
+
 Feito isso, construa a aplicação com o **make**, que internamente está chamando o comando *docker build*:
 
 
 ```
 make
 ```
+
+## Nono
 
 Para ver a execução do script **usage**, basta rodar a imagem:
 

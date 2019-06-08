@@ -1,6 +1,6 @@
 # Registry
 
-Para se logar no registry interno do OKD e conseguir subir novas imagens sem precisar torná-las públicas, primeiro é preciso fazer o login do usuário em questão:
+Para se logar no registry interno do OKD e conseguir subir novas imagens sem precisar torná-las públicas, primeiro é preciso dar permissões elevadas para o usuário em questão e se logar:
 
 
 ```
@@ -12,7 +12,8 @@ oc login -u user
 Feito isso, busque pelo serviço chamado **docker-registry**:
 
 ```
-oc get svc
+oc get svc --all-namespaces
+
 NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                   AGE
 docker-registry    ClusterIP   172.30.136.192   <none>        5000/TCP                  3d
 ```
@@ -31,7 +32,7 @@ docker push 172.30.136.192:5000/openshift/lighttpd-centos7
 oc get images | grep lighttpd-centos7
 ```
 
-Subindo no namespace **openshift** esta image ficará disponível para todo os projetos. Mas também é possível subir em qualquer outro namespace.
+Subindo no namespace **openshift** esta imagem ficará disponível para todo os projetos. Mas também é possível subir em qualquer outro namespace.
 
 ### Certificado auto-assinado
 

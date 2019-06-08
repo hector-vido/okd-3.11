@@ -1,6 +1,9 @@
 # Templates
 
-Mais fácil do que criar um template do zero, é escolher um que se pareça com aquilo que quer e então modificá-lo:
+Os templates são um dos recursos mais interessantes do Openshift, pois facilitam o provisionamento de objetos pré-definidos. Podendo ser pods, deployments, serviços, rotas ou todos eles juntos.
+Dentro de cada template existem vários outros objetos definidos. Isso pode ser facilmente notado pelas várias chaves **kind** que se repetem.
+
+Mais fácil do que criar um template do zero, é escolher um que se pareça com aquilo que quer e então modificá-lo. Vamos utilizar o template **httpd-example** do catálogo para criar um template para o **lighttpd**:
 
 ```
 oc get templates -n openshift
