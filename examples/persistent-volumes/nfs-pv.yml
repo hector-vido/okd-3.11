@@ -1,59 +1,7 @@
-apiVersion: v1                                                                                                                                                          
-kind: PersistentVolume                                                                                                                                                  
-metadata:
-  name: nfs-v1
-spec:
-  capacity:
-    storage: 256Mi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 27.11.90.40
-    path: "/volumes/v1"
----
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-v2
-spec:
-  capacity:
-    storage: 256Mi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 27.11.90.40
-    path: "/volumes/v2"
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nfs-v3
-spec:
-  capacity:
-    storage: 512Mi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 27.11.90.40
-    path: "/volumes/v3"
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nfs-v4
-spec:
-  capacity:
-    storage: 512Mi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 27.11.90.40
-    path: "/volumes/v4"
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nfs-v5
+  name: nfs-mysql
 spec:
   capacity:
     storage: 1Gi
@@ -61,5 +9,17 @@ spec:
     - ReadWriteOnce
   nfs:
     server: 27.11.90.40
-    path: "/volumes/v5"
+    path: "/volumes/v1"
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-cache
+spec:
+  capacity:
+    storage: 512Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 27.11.90.40
+    path: "/volumes/v2"

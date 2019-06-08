@@ -9,9 +9,9 @@ spec:
     tty: true
     stdin: true
     volumeMounts:
-    - name: shared-data
-      mountPath: /var/shared-data
+    - name: cached-data
+      mountPath: /var/cached-data
   volumes:
-  - name: shared-data
+  - name: cached-data
     persistentVolumeClaim:
-      claimName: nfs-pvc1
+      claimName: cache

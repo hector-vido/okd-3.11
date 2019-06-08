@@ -37,7 +37,7 @@ Once the volumes as exposed from storage server, you can create a PersistentVolu
 **nfs-pv.yml**
 
 ```
-apiVersion: v1                                            
+apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-mysql
@@ -49,7 +49,8 @@ spec:
   nfs:
     server: 27.11.90.40
     path: "/volumes/v1"
-apiVersion: v1                                            
+---
+apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-cache
@@ -61,7 +62,6 @@ spec:
   nfs:
     server: 27.11.90.40
     path: "/volumes/v2"
-
 ```
 
 To see these two **PersistentVolumes* execute the following command:
