@@ -13,6 +13,11 @@ Vagrant.configure("2") do |config|
       vb.memory = "2048"
       vb.cpus = "2"
     end
+    srv.vm.provider "libvirt" do |lv|
+      lv.memory = "2048"
+      lv.cpus = "2"
+      lv.cputopology :sockets => 1, :cores => 1, :threads => 2
+    end
   end
   
   config.vm.define "node2" do |srv|
@@ -21,6 +26,11 @@ Vagrant.configure("2") do |config|
     srv.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = "2"
+    end
+    srv.vm.provider "libvirt" do |lv|
+      lv.memory = "2048"
+      lv.cpus = "2"
+      lv.cputopology :sockets => 1, :cores => 1, :threads => 2
     end
   end
 
@@ -40,6 +50,11 @@ Vagrant.configure("2") do |config|
     srv.vm.provider "virtualbox" do |vb|
       vb.memory = "6144"
       vb.cpus = "4"
+    end
+    srv.vm.provider "libvirt" do |lv|
+      lv.memory = "4096"
+      lv.cpus = "4"
+      lv.cputopology :sockets => 1, :cores => 2, :threads => 2
     end
   end
 
