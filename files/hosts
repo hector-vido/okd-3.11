@@ -16,12 +16,12 @@ openshift_metrics_install_metrics=true
 openshift_disable_check=disk_availability,memory_availability,docker_storage
 
 [masters]
-master.okd.os openshift_public_ip='27.11.90.10' openshift_public_hostname='master.okd.os'
+okd.example.com openshift_public_ip='27.11.90.10' openshift_public_hostname='okd.example.com'
 
 [etcd]
-master.okd.os etcd_ip='27.11.90.10'
+okd.example.com etcd_ip='27.11.90.10'
 
 [nodes]
-master.okd.os openshift_node_group_name='node-config-master-infra' openshift_public_ip='27.11.90.10' openshift_public_hostname='master.okd.os'
-node1.okd.os openshift_node_group_name='node-config-compute' openshift_public_ip='27.11.90.20' openshift_public_hostname='node1.okd.os'
-node2.okd.os openshift_node_group_name='node-config-compute' openshift_public_ip='27.11.90.30' openshift_public_hostname='node2.okd.os'
+okd.example.com openshift_node_group_name='node-config-master-infra' openshift_public_ip='27.11.90.10' openshift_public_hostname='okd.example.com'
+node1.example.com openshift_node_group_name='node-config-compute' openshift_public_ip='27.11.90.20' openshift_public_hostname='node1.example.com'
+node2.example.com openshift_node_group_name='node-config-compute' openshift_public_ip='27.11.90.30' openshift_public_hostname='node2.example.com'
