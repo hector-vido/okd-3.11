@@ -6,16 +6,16 @@ Volumes is a way that containers can share data between pods. Persistent Volumes
 Once you had provisioned your OKD cluster, you can go to the **storage** machine and create some NFS mount points:
 
 ```
-mkdir -p /volumes/v{1,2,3,4,5}
-chmod 0700 /volumes/v{1,2,3,4,5}
-chown nfsnobody: /volumes/v{1,2,3,4,5}
+mkdir -p /srv/nfs/v{0,1,2,3,4}
+chmod 0700 /srv/nfs/v{0,1,2,3,4}
+chown nfsnobody: /srv/nfs/v{0,1,2,3,4}
 
 cat > /etc/exports <<EOF
-/volumes/v1 27.11.90.0/255.255.255.0(rw,all_squash)
-/volumes/v2 27.11.90.0/255.255.255.0(rw,all_squash)
-/volumes/v3 27.11.90.0/255.255.255.0(rw,all_squash)
-/volumes/v4 27.11.90.0/255.255.255.0(rw,all_squash)
-/volumes/v5 27.11.90.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v0 27.11.90.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v1 27.11.90.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v2 27.11.90.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v3 27.11.90.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v4 27.11.90.0/255.255.255.0(rw,all_squash)
 EOF
 
 exportfs -a
@@ -48,7 +48,7 @@ spec:
     - ReadWriteOnce
   nfs:
     server: 27.11.90.40
-    path: "/volumes/v1"
+    path: "/srv/nfs/v0"
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -61,7 +61,7 @@ spec:
     - ReadWriteMany
   nfs:
     server: 27.11.90.40
-    path: "/volumes/v2"
+    path: "/srv/nfs/v1"
 ```
 
 To see these two **PersistentVolumes* execute the following command:

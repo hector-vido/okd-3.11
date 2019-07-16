@@ -1,16 +1,14 @@
 #!/bin/bash
 
-mkdir -p /volumes/v{1,2,3,4,5}
-chmod 0700 /volumes/v{1,2,3,4,5}
-chown nfsnobody: /volumes/v{1,2,3,4,5}
+> /etc/exports
 
-cat > /etc/exports <<EOF
-/volumes/v1 27.11.90.0/255.255.255.0(rw,all_squash)
-/volumes/v2 27.11.90.0/255.255.255.0(rw,all_squash)
-/volumes/v3 27.11.90.0/255.255.255.0(rw,all_squash)
-/volumes/v4 27.11.90.0/255.255.255.0(rw,all_squash)
-/volumes/v5 27.11.90.0/255.255.255.0(rw,all_squash)
-EOF
+for X in $(seq 0 9); do
+	mkdir -p /srv/nfs/v$X
+	echo "/srv/nfs/v$X 27.11.90.0/24(rw,all_squash)" >> /etc/exports
+done
+
+chmod 0700 /srv/nfs/v*
+chown nfsnobody: /srv/nfs/v*
 
 exportfs -a
 systemctl start rpcbind nfs-server

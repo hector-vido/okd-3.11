@@ -41,6 +41,11 @@ Vagrant.configure("2") do |config|
       vb.memory = "256"
       vb.cpus = "1"
     end
+    srv.vm.provider "libvirt" do |lv|
+      lv.memory = "256"
+      lv.cpus = "1"
+      lv.cputopology :sockets => 1, :cores => 1, :threads => 1
+    end
     srv.vm.provision "shell", path: "provision/storage.sh"
   end
   
@@ -52,7 +57,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = "4"
     end
     srv.vm.provider "libvirt" do |lv|
-      lv.memory = "4096"
+      lv.memory = "6144"
       lv.cpus = "4"
       lv.cputopology :sockets => 1, :cores => 2, :threads => 2
     end
