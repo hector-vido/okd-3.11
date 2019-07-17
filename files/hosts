@@ -13,7 +13,8 @@ openshift_logging_install_logging=false
 ansible_service_broker_install=false
 template_service_broker_install=false
 openshift_metrics_install_metrics=true
-openshift_disable_check=disk_availability,memory_availability,docker_storage
+openshift_master_default_subdomain='example.com'
+openshift_disable_check='disk_availability,memory_availability,docker_storage'
 
 [masters]
 okd.example.com openshift_public_ip='27.11.90.10' openshift_public_hostname='okd.example.com'
