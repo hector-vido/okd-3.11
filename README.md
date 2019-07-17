@@ -1,14 +1,14 @@
 OKD - 3.11
 ==========
 
-This **Vagrantfile** create 4 machines, one with the roles "master" and "infra", other two with the "node" role and another one for storage purposes:
+This **Vagrantfile** create 4 machines, one with the roles "master" and "infra", other two with the "node" role and another one for storage/identity purposes:
 
 | Machine             | Address      | Roles         |
 |---------------------|--------------|---------------|
 | okd.example.com     | 27.11.90.10  | master, infra |
 | node1.example.com   | 27.11.90.20  | node          |
 | node2.example.com   | 27.11.90.30  | node          |
-| storage.example.com | 27.11.90.40  | -             |
+| storage.example.com | 27.11.90.40  | storage, ldap |
 
 Everything is installed during the provisioning stage, this means that after the provisioning step, vagrant execute these two commands:
 
@@ -32,6 +32,7 @@ Disabled Services
 
  - openshift_logging_install_logging
  - openshift_enable_olm
+ - openshift_enable_service_catalog
  - ansible_service_broker_install
  - template_service_broker_install
 
@@ -42,11 +43,6 @@ From a software point of view, you will need a least **VirtualBox**.
 From a hardware point of view, each machine uses 2 cpu cores, unless the storage one. The master is configured to use 6GiB of RAM, the node ones 2GiB and the storage 256MiB, so you will need at least 11GiB of RAM, or even less if you lower the memory of each vm.
 If you disable the **openshift_metrics_install_metrics** you can lower the memory from 6GiB to 2GiB on master, and each node to 1GiB.
 
-Low RAM
--------
-
-You can use the brach named **low-end** and run this lab with 2 machines and 8GiB of RAM.
-
 Installation
 ------------
 
@@ -56,8 +52,9 @@ This takes a lot of time, just go to the cloned folder and type:
 
 If you want to access the **webconsole** and/or see metrics you can add the hostnames and ip address on **/etc/hosts**:
 
-    echo '27.11.90.10 okd.example.com' | sudo tee -a /etc/hosts
-	echo '27.11.90.10 hawkular-metrics.router.default.svc.cluster.local' | sudo tee -a /etc/hosts
+	echo '27.11.90.10 okd.example.com hawkular-metrics.example.com' | sudo tee -a /etc/hosts
+
+Remeber to access the address [https://hawkular-metrics.example.com](https://hawkular-metrics.example.com) and accept the self-signed certificate.
 
 And then access the address [https://okd.example.com:8443](https://okd.example.com:8443).
 The **username** and **password** are created in the first login attempt from the username you choose.

@@ -10,6 +10,7 @@ openshift_docker_options='--selinux-enabled --log-driver=journald --signature-ve
 openshift_enable_olm=false
 openshift_cluster_monitoring_operator_install=false
 openshift_logging_install_logging=false
+openshift_enable_service_catalog=false
 ansible_service_broker_install=false
 template_service_broker_install=false
 openshift_metrics_install_metrics=true

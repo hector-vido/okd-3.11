@@ -1,5 +1,7 @@
 #!/bin/bash
 
+yum install -y vim openldap-servers
+
 > /etc/exports
 
 for X in $(seq 0 9); do
