@@ -7,7 +7,7 @@ By default OKD will grant access to any user and any password because **AllowAll
 HTPasswd
 --------
 
-Just to simplify and create the simplest secure authentication, login through ssh in [master.okd.os:8443](master.okd.os:8443) and create an **htpasswd** file with an user and a password:
+Just to simplify and create the simplest secure authentication, login through ssh in [okd.example.com:8443](okd.example.com:8443) and create an **htpasswd** file with an user and a password:
 
     htpasswd -bc /etc/origin/master/htpasswd okd pass123
 

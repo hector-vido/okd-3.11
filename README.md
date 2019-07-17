@@ -3,12 +3,12 @@ OKD - 3.11
 
 This **Vagrantfile** create 4 machines, one with the roles "master" and "infra", other two with the "node" role and another one for storage purposes:
 
-| Machine        | Address      | Roles         |
-|----------------|--------------|---------------|
-| master.okd.os  | 27.11.90.10  | master, infra |
-| node1.okd.os   | 27.11.90.20  | node          |
-| node2.okd.os   | 27.11.90.30  | node          |
-| storage.okd.os | 27.11.90.40  | -             |
+| Machine             | Address      | Roles         |
+|---------------------|--------------|---------------|
+| okd.example.com     | 27.11.90.10  | master, infra |
+| node1.example.com   | 27.11.90.20  | node          |
+| node2.example.com   | 27.11.90.30  | node          |
+| storage.example.com | 27.11.90.40  | -             |
 
 Everything is installed during the provisioning stage, this means that after the provisioning step, vagrant execute these two commands:
 
@@ -56,8 +56,8 @@ This takes a lot of time, just go to the cloned folder and type:
 
 If you want to access the **webconsole** and/or see metrics you can add the hostnames and ip address on **/etc/hosts**:
 
-    echo '27.11.90.10 master.okd.os' | sudo tee -a /etc/hosts
+    echo '27.11.90.10 okd.example.com' | sudo tee -a /etc/hosts
 	echo '27.11.90.10 hawkular-metrics.router.default.svc.cluster.local' | sudo tee -a /etc/hosts
 
-And then access the address [https://master.okd.os:8443](https://master.okd.os:8443).
+And then access the address [https://okd.example.com:8443](https://okd.example.com:8443).
 The **username** and **password** are created in the first login attempt from the username you choose.
