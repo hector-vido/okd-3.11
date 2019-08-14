@@ -5,17 +5,15 @@ etcd
 
 [OSEv3:vars]
 ansible_ssh_user=root
-openshift_deployment_type=origin
-openshift_docker_options='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry=172.30.0.0/16'
 openshift_enable_olm=false
-openshift_cluster_monitoring_operator_install=false
-openshift_logging_install_logging=false
+openshift_deployment_type=origin
 openshift_enable_service_catalog=false
-ansible_service_broker_install=false
-template_service_broker_install=false
 openshift_metrics_install_metrics=true
 openshift_master_default_subdomain='example.com'
+openshift_cluster_monitoring_operator_install=false
 openshift_disable_check='disk_availability,memory_availability,docker_storage'
+openshift_docker_options='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry=172.30.0.0/16'
+openshift_master_identity_providers=[{'name': 'HTPASSWD', 'challenge': 'true', 'login': 'true', 'kind':'HTPasswdPasswordIdentityProvider', 'mappingMethod': 'claim'}]
 
 [masters]
 okd.example.com openshift_public_ip='27.11.90.10' openshift_public_hostname='okd.example.com'

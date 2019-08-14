@@ -40,10 +40,14 @@ cp /vagrant/files/key /root/.ssh/id_rsa; chmod 400 /root/.ssh/id_rsa
 cp /vagrant/files/key.pub /root/.ssh/id_rsa.pub
 sed -i -e "s/#host_key_checking/host_key_checking/" /etc/ansible/ansible.cfg
 sed -i -e "s@#private_key_file = /path/to/file@private_key_file = /root/.ssh/id_rsa@" /etc/ansible/ansible.cfg
-git clone https://github.com/openshift/openshift-ansible /root/openshift-ansible
+
+git clone -b release-3.11 --single-branch https://github.com/openshift/openshift-ansible /root/openshift-ansible
 cd /root/openshift-ansible
-git checkout release-3.11
 sed -i 's/openshift.common.ip/openshift.common.public_ip/' roles/openshift_control_plane/templates/master.yaml.v1.j2
+
+mkdir -p /etc/origin/master
+htpasswd -Bbc /etc/origin/master/htpasswd admin 4linux
+
 ansible-playbook /root/openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
 
