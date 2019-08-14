@@ -48,7 +48,7 @@ sed -i 's/openshift.common.ip/openshift.common.public_ip/' roles/openshift_contr
 ansible-playbook /root/openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
 
-htpasswd -Bbc /etc/origin/master/htpasswd admin 4linux
+htpasswd -Bbc /etc/origin/master/htpasswd developer 4linux
 
 echo <<EOF
 An user named "admin" with password "4linux"
