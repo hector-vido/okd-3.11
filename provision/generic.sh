@@ -45,9 +45,14 @@ git clone -b release-3.11 --single-branch https://github.com/openshift/openshift
 cd /root/openshift-ansible
 sed -i 's/openshift.common.ip/openshift.common.public_ip/' roles/openshift_control_plane/templates/master.yaml.v1.j2
 
-mkdir -p /etc/origin/master
-htpasswd -Bbc /etc/origin/master/htpasswd admin 4linux
-
 ansible-playbook /root/openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
 
+htpasswd -Bbc /etc/origin/master/htpasswd admin 4linux
+
+echo <<EOF
+An user named "admin" with password "4linux"
+
+Add the following line in your /etc/hosts:
+27.11.90.10     okd.example.com hawkular-metrics.example.com console.example.com
+EOF
