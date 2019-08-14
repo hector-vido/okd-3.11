@@ -1,0 +1,14 @@
+dn: cn=admins,ou=groups,dc=extras,dc=example,dc=com
+objectClass: top
+objectClass: posixGroup
+cn: admins
+gidNumber: 10000
+memberUid: ronnie.james
+
+dn: cn=users,ou=groups,dc=extras,dc=example,dc=com
+objectClass: top
+objectClass: posixGroup
+cn: users
+gidNumber: 10001
+memberUid: lou.gramm
+memberUid: tina.turner

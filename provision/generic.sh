@@ -9,10 +9,10 @@ cat >> /etc/hosts <<EOF
 27.11.90.10 okd.example.com
 27.11.90.20 node1.example.com
 27.11.90.30 node2.example.com
-27.11.90.40 storage.example.com
+27.11.90.40 extras.example.com
 EOF
 
-if [ "$HOSTNAME" == "storage.example.com" ]; then
+if [ "$HOSTNAME" == "extras.example.com" ]; then
 	exit
 fi
 
@@ -51,8 +51,8 @@ ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
 htpasswd -Bbc /etc/origin/master/htpasswd developer 4linux
 
 echo <<EOF
-An user named "admin" with password "4linux"
+An user named "admin" with password "4linux" was created.
 
 Add the following line in your /etc/hosts:
-27.11.90.10     okd.example.com hawkular-metrics.example.com console.example.com
+27.11.90.10     okd.example.com
 EOF

@@ -34,8 +34,8 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define "storage" do |srv|
-    srv.vm.hostname = "storage.example.com"
+  config.vm.define "extras" do |srv|
+    srv.vm.hostname = "extras.example.com"
     srv.vm.network "private_network", ip: "27.11.90.40"
     srv.vm.provider "virtualbox" do |vb|
       vb.memory = "256"
@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
       lv.cpus = "1"
       lv.cputopology :sockets => 1, :cores => 1, :threads => 1
     end
-    srv.vm.provision "shell", path: "provision/storage.sh"
+    srv.vm.provision "shell", path: "provision/extras.sh"
   end
   
   config.vm.define "master" do |srv|

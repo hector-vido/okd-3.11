@@ -1,0 +1,13 @@
+dn: dc=extras,dc=example,dc=com
+dc: extras
+o: Origin Kubernetes Distribution LDAP
+objectclass: organization
+objectclass: dcObject
+
+dn: ou=users,dc=extras,dc=example,dc=com
+objectClass: organizationalUnit
+ou: users
+
+dn: ou=groups,dc=extras,dc=example,dc=com
+objectClass: organizationalUnit
+ou: groups
