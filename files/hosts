@@ -9,7 +9,7 @@ openshift_enable_olm=false
 openshift_deployment_type=origin
 openshift_enable_service_catalog=false
 openshift_metrics_install_metrics=true
-openshift_master_default_subdomain='example.com'
+openshift_master_default_subdomain='27-11-90-10.nip.io'
 openshift_cluster_monitoring_operator_install=false
 openshift_disable_check='disk_availability,memory_availability,docker_storage'
 openshift_docker_options='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry=172.30.0.0/16'
