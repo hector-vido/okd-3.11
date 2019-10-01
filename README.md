@@ -57,4 +57,4 @@ If you want to access the **webconsole** and/or see metrics you can add the host
 Remeber to access the address [https://hawkular-metrics.172-27-11-10.nip.io](https://hawkular-metrics.172-27-11-10.nip.io) and accept the self-signed certificate.
 
 And then access the address [https://okd.example.com:8443](https://okd.example.com:8443).
-The **username** and **password** are created in the first login attempt from the username you choose.
+The **username** and **password** are **developer** and **4linux**.
