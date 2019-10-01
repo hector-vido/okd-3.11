@@ -52,7 +52,7 @@ This takes a lot of time, just go to the cloned folder and type:
 
 If you want to access the **webconsole** and/or see metrics you can add the hostnames and ip address on **/etc/hosts**:
 
-	echo '172.27.11.10 okd.example.com hawkular-metrics.example.com' | sudo tee -a /etc/hosts
+	echo '172.27.11.10 okd.example.com' | sudo tee -a /etc/hosts
 
 Remeber to access the address [https://hawkular-metrics.172-27-11-10.nip.io](https://hawkular-metrics.172-27-11-10.nip.io) and accept the self-signed certificate.
 
