@@ -54,7 +54,7 @@ If you want to access the **webconsole** and/or see metrics you can add the host
 
 	echo '172.27.11.10 okd.example.com hawkular-metrics.example.com' | sudo tee -a /etc/hosts
 
-Remeber to access the address [https://hawkular-metrics.example.com](https://hawkular-metrics.example.com) and accept the self-signed certificate.
+Remeber to access the address [https://hawkular-metrics.172-27-11-10.nip.io](https://hawkular-metrics.172-27-11-10.nip.io) and accept the self-signed certificate.
 
 And then access the address [https://okd.example.com:8443](https://okd.example.com:8443).
 The **username** and **password** are created in the first login attempt from the username you choose.
