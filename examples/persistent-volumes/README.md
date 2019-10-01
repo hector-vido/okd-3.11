@@ -11,11 +11,11 @@ chmod 0700 /srv/nfs/v{0,1,2,3,4}
 chown nfsnobody: /srv/nfs/v{0,1,2,3,4}
 
 cat > /etc/exports <<EOF
-/srv/nfs/v0 27.11.90.0/255.255.255.0(rw,all_squash)
-/srv/nfs/v1 27.11.90.0/255.255.255.0(rw,all_squash)
-/srv/nfs/v2 27.11.90.0/255.255.255.0(rw,all_squash)
-/srv/nfs/v3 27.11.90.0/255.255.255.0(rw,all_squash)
-/srv/nfs/v4 27.11.90.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v0 172.27.11.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v1 172.27.11.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v2 172.27.11.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v3 172.27.11.0/255.255.255.0(rw,all_squash)
+/srv/nfs/v4 172.27.11.0/255.255.255.0(rw,all_squash)
 EOF
 
 exportfs -a
@@ -47,7 +47,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   nfs:
-    server: 27.11.90.40
+    server: 172.27.11.40
     path: "/srv/nfs/v0"
 ---
 apiVersion: v1
@@ -60,7 +60,7 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: 27.11.90.40
+    server: 172.27.11.40
     path: "/srv/nfs/v1"
 ```
 

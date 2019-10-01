@@ -9,19 +9,19 @@ openshift_enable_olm=false
 openshift_deployment_type=origin
 openshift_enable_service_catalog=false
 openshift_metrics_install_metrics=true
-openshift_master_default_subdomain='27-11-90-10.nip.io'
+openshift_master_default_subdomain='172-27-11-10.nip.io'
 openshift_cluster_monitoring_operator_install=false
 openshift_disable_check='disk_availability,memory_availability,docker_storage'
 openshift_docker_options='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry=172.30.0.0/16'
 openshift_master_identity_providers=[{'name': 'HTPASSWD', 'challenge': 'true', 'login': 'true', 'kind':'HTPasswdPasswordIdentityProvider', 'mappingMethod': 'claim'}]
 
 [masters]
-okd.example.com openshift_public_ip='27.11.90.10' openshift_public_hostname='okd.example.com'
+okd.example.com openshift_public_ip='172.27.11.10' openshift_public_hostname='okd.example.com'
 
 [etcd]
-okd.example.com etcd_ip='27.11.90.10'
+okd.example.com etcd_ip='172.27.11.10'
 
 [nodes]
-okd.example.com openshift_node_group_name='node-config-master-infra' openshift_public_ip='27.11.90.10' openshift_public_hostname='okd.example.com'
-node1.example.com openshift_node_group_name='node-config-compute' openshift_public_ip='27.11.90.20' openshift_public_hostname='node1.example.com'
-node2.example.com openshift_node_group_name='node-config-compute' openshift_public_ip='27.11.90.30' openshift_public_hostname='node2.example.com'
+okd.example.com openshift_node_group_name='node-config-master-infra' openshift_public_ip='172.27.11.10' openshift_public_hostname='okd.example.com'
+node1.example.com openshift_node_group_name='node-config-compute' openshift_public_ip='172.27.11.20' openshift_public_hostname='node1.example.com'
+node2.example.com openshift_node_group_name='node-config-compute' openshift_public_ip='172.27.11.30' openshift_public_hostname='node2.example.com'

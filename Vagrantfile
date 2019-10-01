@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.define "node1" do |srv|
     srv.vm.hostname = "node1.example.com"
-    srv.vm.network "private_network", ip: "27.11.90.20"
+    srv.vm.network "private_network", ip: "172.27.11.20"
     srv.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = "2"
@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.define "node2" do |srv|
     srv.vm.hostname = "node2.example.com"
-    srv.vm.network "private_network", ip: "27.11.90.30"
+    srv.vm.network "private_network", ip: "172.27.11.30"
     srv.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = "2"
@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "extras" do |srv|
     srv.vm.hostname = "extras.example.com"
-    srv.vm.network "private_network", ip: "27.11.90.40"
+    srv.vm.network "private_network", ip: "172.27.11.40"
     srv.vm.provider "virtualbox" do |vb|
       vb.memory = "256"
       vb.cpus = "1"
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.define "master" do |srv|
     srv.vm.hostname = "okd.example.com"
-    srv.vm.network "private_network", ip: "27.11.90.10"
+    srv.vm.network "private_network", ip: "172.27.11.10"
     srv.vm.provider "virtualbox" do |vb|
       vb.memory = "6144"
       vb.cpus = "4"

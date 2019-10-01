@@ -3,10 +3,10 @@
 HOSTS="$(head -n3 /etc/hosts)"
 echo -e "$HOSTS" > /etc/hosts
 cat >> /etc/hosts <<EOF
-27.11.90.10 okd.example.com okd
-27.11.90.20 node1.example.com okd
-27.11.90.30 node2.example.com okd
-27.11.90.40 extras.example.com extras
+172.27.11.10 okd.example.com okd
+172.27.11.20 node1.example.com okd
+172.27.11.30 node2.example.com okd
+172.27.11.40 extras.example.com extras
 EOF
 
 yum -y install vim openldap-servers openldap-clients
@@ -29,7 +29,7 @@ ldapadd -h 'localhost' -D 'cn=admin,dc=extras,dc=example,dc=com' -w 'okdldap' -f
 
 for X in $(seq 0 9); do
         mkdir -p /srv/nfs/v$X
-        echo "/srv/nfs/v$X 27.11.90.0/24(rw,all_squash)" >> /etc/exports
+        echo "/srv/nfs/v$X 172.27.11.0/24(rw,all_squash)" >> /etc/exports
 done
 
 chmod 0700 /srv/nfs/v*

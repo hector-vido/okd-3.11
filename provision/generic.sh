@@ -6,10 +6,10 @@ cp /vagrant/files/key.pub /root/.ssh/authorized_keys
 HOSTS="$(head -n3 /etc/hosts)"
 echo -e "$HOSTS" > /etc/hosts
 cat >> /etc/hosts <<EOF
-27.11.90.10 okd.example.com
-27.11.90.20 node1.example.com
-27.11.90.30 node2.example.com
-27.11.90.40 extras.example.com
+172.27.11.10 okd.example.com
+172.27.11.20 node1.example.com
+172.27.11.30 node2.example.com
+172.27.11.40 extras.example.com
 EOF
 
 if [ "$HOSTNAME" == "extras.example.com" ]; then
@@ -54,5 +54,5 @@ echo <<EOF
 An user named "admin" with password "4linux" was created.
 
 Add the following line in your /etc/hosts:
-27.11.90.10     okd.example.com
+172.27.11.10     okd.example.com
 EOF

@@ -5,10 +5,10 @@ This **Vagrantfile** create 4 machines, one with the roles "master" and "infra",
 
 | Machine             | Address      | Roles         |
 |---------------------|--------------|---------------|
-| okd.example.com     | 27.11.90.10  | master, infra |
-| node1.example.com   | 27.11.90.20  | node          |
-| node2.example.com   | 27.11.90.30  | node          |
-| storage.example.com | 27.11.90.40  | storage, ldap |
+| okd.example.com     | 172.27.11.10  | master, infra |
+| node1.example.com   | 172.27.11.20  | node          |
+| node2.example.com   | 172.27.11.30  | node          |
+| storage.example.com | 172.27.11.40  | storage, ldap |
 
 Everything is installed during the provisioning stage, this means that after the provisioning step, vagrant execute these two commands:
 
@@ -52,7 +52,7 @@ This takes a lot of time, just go to the cloned folder and type:
 
 If you want to access the **webconsole** and/or see metrics you can add the hostnames and ip address on **/etc/hosts**:
 
-	echo '27.11.90.10 okd.example.com hawkular-metrics.example.com' | sudo tee -a /etc/hosts
+	echo '172.27.11.10 okd.example.com hawkular-metrics.example.com' | sudo tee -a /etc/hosts
 
 Remeber to access the address [https://hawkular-metrics.example.com](https://hawkular-metrics.example.com) and accept the self-signed certificate.
 
