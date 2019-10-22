@@ -3,12 +3,12 @@ OKD - 3.11
 
 This **Vagrantfile** create 4 machines, one with the roles "master" and "infra", other two with the "node" role and another one for storage/identity purposes:
 
-| Machine             | Address      | Roles         |
-|---------------------|--------------|---------------|
+| Machine             | Address       | Roles         |
+|---------------------|---------------|---------------|
 | okd.example.com     | 172.27.11.10  | master, infra |
 | node1.example.com   | 172.27.11.20  | node          |
 | node2.example.com   | 172.27.11.30  | node          |
-| storage.example.com | 172.27.11.40  | storage, ldap |
+| extras.example.com  | 172.27.11.40  | storage, ldap |
 
 Everything is installed during the provisioning stage, this means that after the provisioning step, vagrant execute these two commands:
 
@@ -16,12 +16,12 @@ Everything is installed during the provisioning stage, this means that after the
     ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
 
 The ansible on master machine is preconfigured with the keys and the hosts to access the other machines without problems.
-During provisioning step, the preconfigured **inventory** presented in *files/hosts* is copied to the master's */etc/ansible/hosts*.
+During provisioning step, the preconfigured **inventory** presented in **`files/hosts`** is copied to the master's **`/etc/ansible/hosts`**.
 
 NAT
 ---
 
-Some configurations on the inventory */etc/ansible/hosts* was added to overcome problems with default NAT interface that vagrant creates:
+Some configurations on the inventory **`/etc/ansible/hosts`** was added to overcome problems with default NAT interface that vagrant creates:
 
  - etcd_ip
  - openshift_public_ip
@@ -41,7 +41,7 @@ Requirements
 
 From a software point of view, you will need a least **VirtualBox**.
 From a hardware point of view, each machine uses 2 cpu cores, unless the storage one. The master is configured to use 6GiB of RAM, the node ones 2GiB and the storage 256MiB, so you will need at least 11GiB of RAM, or even less if you lower the memory of each vm.
-If you disable the **openshift_metrics_install_metrics** you can lower the memory from 6GiB to 2GiB on master, and each node to 1GiB.
+If you disable the **`openshift_metrics_install_metrics`** you can lower the memory from 6GiB to ~2GiB on master, and each node to 1GiB.
 
 Installation
 ------------
