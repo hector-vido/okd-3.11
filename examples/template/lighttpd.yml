@@ -1,4 +1,3 @@
- 
 apiVersion: template.openshift.io/v1
 kind: Template
 labels:
@@ -7,28 +6,24 @@ labels:
 message: |-
   The following service(s) have been created in your project: ${NAME}.
 
-  For more information about using this template, including OKD considerations, see https://github.com/hector-vido/sti-lighttpd/blob/master/README.md.
+  For more information about using this template, including OKD considerations, see https://raw.githubusercontent.com/hector-vido/lighttpd-ex/master/README.md.
 metadata:
   annotations:
     description: An example Lighttpd HTTP Server application that serves static
       content. For more information about using this template, including OpenShift
-      considerations, see https://github.com/hector-vido/sti-lighttpd/blob/master/README.md.
+      considerations, see https://raw.githubusercontent.com/hector-vido/lighttpd-ex/master/README.md.
     iconClass: "fa fa-paper-plane-o"
     openshift.io/display-name: Lighttpd Server
-    openshift.io/documentation-url: https://github.com/openshift/httpd-ex
+    openshift.io/documentation-url: https://github.com/hector-vido/lighttpd-ex
     openshift.io/long-description: This template defines resources needed to develop
       a static application served by Lighttpd Server, including a build
-      configuration and application deployment configuration.
-    openshift.io/provider-display-name: Dragonfly Creative.
-    openshift.io/support-url: https://dragonflycreative.com.br
+      configuration, application deployment configuration and HPA.
+    openshift.io/provider-display-name: $Linux
+    openshift.io/support-url: https://www.hector-vido.com.br
     tags: quickstart,lighttpd
     template.openshift.io/bindable: "false"
-  creationTimestamp: 2019-06-04T02:10:06Z
   name: lighttpd-example
   namespace: openshift
-  resourceVersion: "1281"
-  selfLink: /apis/template.openshift.io/v1/namespaces/openshift/templates/lighttpd-example
-  uid: df272219-866d-11e9-b7c6-525400f0e95b
 objects:
 - apiVersion: v1
   kind: Service
@@ -120,7 +115,7 @@ objects:
               port: 8080
             initialDelaySeconds: 30
             timeoutSeconds: 3
-          name: lighttpd-example
+          name: lighttpd
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -131,17 +126,34 @@ objects:
             timeoutSeconds: 3
           resources:
             limits:
+              cpu: ${CPU_LIMIT}
+              memory: ${MEMORY_LIMIT}
+            requests:
+              cpu: ${CPU_LIMIT}
               memory: ${MEMORY_LIMIT}
     triggers:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - lighttpd-example
+        - lighttpd
         from:
           kind: ImageStreamTag
           name: ${NAME}:latest
       type: ImageChange
     - type: ConfigChange
+- apiVersion: autoscaling/v1
+  kind: HorizontalPodAutoscaler
+  metadata:
+    creationTimestamp: null
+    name: ${NAME}
+  spec:
+    maxReplicas: 5
+    minReplicas: 1
+    scaleTargetRef:
+      apiVersion: apps.openshift.io/v1
+      kind: DeploymentConfig
+      name: ${NAME}
+    targetCPUUtilizationPercentage: ${CPU_PERCENT}
 parameters:
 - description: The name assigned to all of the frontend objects defined in this template.
   displayName: Name
@@ -158,11 +170,21 @@ parameters:
   name: MEMORY_LIMIT
   required: true
   value: 128Mi
+- description: Maximum % of vcore the container can use.
+  displayName: CPU Limit
+  name: CPU_LIMIT
+  required: true
+  value: 200m
+- description: Maximum % usage to activate autoscaling.
+  displayName: CPU Percent
+  name: CPU_PERCENT
+  required: true
+  value: "80"
 - description: The URL of the repository with your application source code.
   displayName: Git Repository URL
   name: SOURCE_REPOSITORY_URL
   required: true
-  value: https://github.com/hector-vido/sti-lighttpd.git
+  value: https://github.com/hector-vido/lighttpd-ex.git
 - description: Set this to a branch name, tag or other ref of your repository if you
     are not using the default branch.
   displayName: Git Reference
