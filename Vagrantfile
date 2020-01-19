@@ -1,67 +1,34 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
+vms = {
+  'extras' => {'memory' => '256', 'cpus' => 1, 'ip' => '40', 'provision' => 'extras.sh'},
+  'node2' => {'memory' => '2048', 'cpus' => 2, 'ip' => '30', 'provision' => 'nodes.sh'},
+  'node1' => {'memory' => '2048', 'cpus' => 2, 'ip' => '20', 'provision' => 'nodes.sh'},
+  'okd' => {'memory' => '4096', 'cpus' => 4, 'ip' => '10', 'provision' => 'masters.sh'}
+}
 
-  config.vm.box = "centos/7"
+Vagrant.configure('2') do |config|
+
+  config.vm.box = 'centos/7'
   config.vm.box_check_update = false
-  
-  config.vm.define "node1" do |srv|
-    srv.vm.hostname = "node1.example.com"
-    srv.vm.network "private_network", ip: "172.27.11.20"
-    srv.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
-      vb.cpus = "2"
-    end
-    srv.vm.provider "libvirt" do |lv|
-      lv.memory = "2048"
-      lv.cpus = "2"
-      lv.cputopology :sockets => 1, :cores => 1, :threads => 2
-    end
-  end
-  
-  config.vm.define "node2" do |srv|
-    srv.vm.hostname = "node2.example.com"
-    srv.vm.network "private_network", ip: "172.27.11.30"
-    srv.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
-      vb.cpus = "2"
-    end
-    srv.vm.provider "libvirt" do |lv|
-      lv.memory = "2048"
-      lv.cpus = "2"
-      lv.cputopology :sockets => 1, :cores => 1, :threads => 2
+
+  vms.each do |name, conf|
+    config.vm.define "#{name}" do |k|
+      k.vm.hostname = "#{name}.example.com"
+      k.vm.network 'private_network', ip: "172.27.11.#{conf['ip']}"
+      k.vm.provider 'virtualbox' do |vb|
+        vb.memory = conf['memory']
+        vb.cpus = conf['cpus']
+      end
+      k.vm.provider 'libvirt' do |lv|
+        lv.memory = conf['memory']
+        lv.cpus = conf['cpus']
+        lv.cputopology :sockets => 1, :cores => conf['cpus'], :threads => '1'
+      end
+      k.vm.provision 'shell', path: "provision/#{conf['provision']}", args: "#{conf['ip']}"
     end
   end
 
-  config.vm.define "extras" do |srv|
-    srv.vm.hostname = "extras.example.com"
-    srv.vm.network "private_network", ip: "172.27.11.40"
-    srv.vm.provider "virtualbox" do |vb|
-      vb.memory = "256"
-      vb.cpus = "1"
-    end
-    srv.vm.provider "libvirt" do |lv|
-      lv.memory = "256"
-      lv.cpus = "1"
-      lv.cputopology :sockets => 1, :cores => 1, :threads => 1
-    end
-    srv.vm.provision "shell", path: "provision/extras.sh"
-  end
-  
-  config.vm.define "master" do |srv|
-    srv.vm.hostname = "okd.example.com"
-    srv.vm.network "private_network", ip: "172.27.11.10"
-    srv.vm.provider "virtualbox" do |vb|
-      vb.memory = "6144"
-      vb.cpus = "4"
-    end
-    srv.vm.provider "libvirt" do |lv|
-      lv.memory = "6144"
-      lv.cpus = "4"
-      lv.cputopology :sockets => 1, :cores => 2, :threads => 2
-    end
-  end
-
-  config.vm.provision "shell", path: "provision/generic.sh"
+  config.vm.provision 'shell', path: 'provision/basic.sh'
 end
