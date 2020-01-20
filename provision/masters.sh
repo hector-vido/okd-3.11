@@ -23,6 +23,7 @@ sed -i -e "s@#private_key_file = /path/to/file@private_key_file = /root/.ssh/id_
 git clone -b release-3.11 --single-branch https://github.com/openshift/openshift-ansible /root/openshift-ansible
 cd /root/openshift-ansible
 sed -i 's/openshift.common.ip/openshift.common.public_ip/' roles/openshift_control_plane/templates/master.yaml.v1.j2
+sed -i 's,--listfile /tmp/heketi-storage.json,--listfile /tmp/heketi-storage.json  --durability none' roles/openshift_storage_glusterfs/tasks/heketi_init_db.yml
 
 ansible-playbook /root/openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
