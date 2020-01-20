@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # LDAP
-yum -y install vim openldap-servers openldap-clients
+yum -y install vim openldap-servers openldap-clients glusterfs-server
 systemctl enable slapd
 systemctl start slapd
 
@@ -26,5 +26,5 @@ chmod 0700 /srv/nfs/v*
 chown nfsnobody: /srv/nfs/v*
 
 exportfs -a
-systemctl start rpcbind nfs-server
-systemctl enable rpcbind nfs-server
+systemctl start rpcbind nfs-server glusterd
+systemctl enable rpcbind nfs-server glusterd
