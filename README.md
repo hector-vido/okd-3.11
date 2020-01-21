@@ -58,3 +58,27 @@ Remeber to access the address [https://hawkular-metrics.172-27-11-10.nip.io](htt
 
 And then access the address [https://okd.example.com:8443](https://okd.example.com:8443).
 The **username** and **password** are **developer** and **4linux**.
+
+Dynamic Provisioning
+--------------------
+
+There is a [GlusterFS](https://www.gluster.org/) service for dynamic `PersistentVolume` creating. This service uses a 10GB raw file located in `/disk.img` on **extras** machine as LVM. The GlusterFS service create a volume with 2GiB for its own use.
+
+That means you can create a maximum of 7 volumes of 1GiB each, or another combination that don't exceed 7GiB.
+
+The `StorageClass` for GlusterFS that works is **glusterfs-storage**, the block one isn't working yet:
+
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql
+  namespace: okd
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: glusterfs-storage
+```
