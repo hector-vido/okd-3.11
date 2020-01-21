@@ -28,3 +28,11 @@ chown nfsnobody: /srv/nfs/v*
 exportfs -a
 systemctl start rpcbind nfs-server glusterd
 systemctl enable rpcbind nfs-server glusterd
+
+# Raw "Disk"
+dd if=/dev/zero of=/disk.img bs=1M count=10000
+losetup /dev/loop0 /disk.img
+
+echo 'touch /var/lock/subsys/local' > /etc/rc.d/rc.local
+echo 'losetup /dev/loop0 /disk.img' >> /etc/rc.d/rc.local
+chmod +x /etc/rc.d/rc.local

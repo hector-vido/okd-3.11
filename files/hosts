@@ -1,4 +1,5 @@
 [OSEv3:children]
+glusterfs
 masters
 nodes
 etcd
@@ -15,6 +16,21 @@ openshift_master_default_subdomain='172-27-11-10.nip.io'
 openshift_disable_check='disk_availability,memory_availability,docker_storage'
 openshift_docker_options='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry=172.30.0.0/16'
 openshift_master_identity_providers=[{'name': 'HTPASSWD', 'challenge': 'true', 'login': 'true', 'kind':'HTPasswdPasswordIdentityProvider', 'mappingMethod': 'claim'}]
+# GlusterFS
+openshift_storage_glusterfs_namespace=app-storage
+openshift_storage_glusterfs_storageclass=true
+openshift_storage_glusterfs_storageclass_default=false
+openshift_storage_glusterfs_block_deploy=true
+openshift_storage_glusterfs_block_host_vol_size=5
+openshift_storage_glusterfs_block_storageclass=true
+openshift_storage_glusterfs_block_storageclass_default=false
+openshift_storage_glusterfs_is_native=false
+openshift_storage_glusterfs_heketi_is_native=true
+openshift_storage_glusterfs_heketi_executor=ssh
+openshift_storage_glusterfs_heketi_ssh_port=22
+openshift_storage_glusterfs_heketi_ssh_user=root
+openshift_storage_glusterfs_heketi_ssh_sudo=false
+openshift_storage_glusterfs_heketi_ssh_keyfile="/root/.ssh/id_rsa"
 
 [masters]
 okd.example.com openshift_public_ip='172.27.11.10' openshift_public_hostname='okd.example.com'
@@ -26,3 +42,6 @@ okd.example.com etcd_ip='172.27.11.10'
 okd.example.com openshift_node_group_name='node-config-master-infra'
 node1.example.com openshift_node_group_name='node-config-compute' 
 node2.example.com openshift_node_group_name='node-config-compute' 
+
+[glusterfs]
+extras.example.com glusterfs_ip=172.27.11.40 glusterfs_devices='[ "/dev/loop0" ]'
