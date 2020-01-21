@@ -29,3 +29,6 @@ ansible-playbook /root/openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook /root/openshift-ansible/playbooks/deploy_cluster.yml
 
 htpasswd -Bbc /etc/origin/master/htpasswd developer 4linux
+
+oc delete -f /vagrant/files/glusterfs-storage.yml
+oc create -f /vagrant/files/glusterfs-storage.yml
