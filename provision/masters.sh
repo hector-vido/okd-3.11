@@ -20,7 +20,7 @@ cp /vagrant/files/ansible.cfg /etc/ansible/ansible.cfg
 sed -i -e "s/#host_key_checking/host_key_checking/" /etc/ansible/ansible.cfg
 sed -i -e "s@#private_key_file = /path/to/file@private_key_file = /root/.ssh/id_rsa@" /etc/ansible/ansible.cfg
 
-git clone -b release-3.11 --single-branch https://github.com/openshift/openshift-ansible /root/openshift-ansible
+git clone -b release-3.11 --single-branch --depth 1 https://github.com/openshift/openshift-ansible /root/openshift-ansible
 cd /root/openshift-ansible
 sed -i 's/openshift.common.ip/openshift.common.public_ip/' roles/openshift_control_plane/templates/master.yaml.v1.j2
 sed -i 's,--listfile /tmp/heketi-storage.json,--listfile /tmp/heketi-storage.json --durability none,' roles/openshift_storage_glusterfs/tasks/heketi_init_db.yml
