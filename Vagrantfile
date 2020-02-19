@@ -3,8 +3,6 @@
 
 vms = {
   'extras' => {'memory' => '256', 'cpus' => 1, 'ip' => '40', 'provision' => 'extras.sh'},
-  'node2' => {'memory' => '2048', 'cpus' => 2, 'ip' => '30', 'provision' => 'nodes.sh'},
-  'node1' => {'memory' => '2048', 'cpus' => 2, 'ip' => '20', 'provision' => 'nodes.sh'},
   'okd' => {'memory' => '4096', 'cpus' => 4, 'ip' => '10', 'provision' => 'masters.sh'}
 }
 
