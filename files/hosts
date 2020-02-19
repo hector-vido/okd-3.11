@@ -21,7 +21,7 @@ openshift_node_groups=[{'name': 'node-config-all-in-one', 'labels': ['node-role.
 localhost ansible_connection=local
 
 [etcd]
-localhost ansible_connection=local
+localhost ansible_connection=local etcd_ip=127.0.0.1
 
 [nodes]
 localhost ansible_connection=local openshift_node_group_name="node-config-all-in-one"
