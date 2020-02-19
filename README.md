@@ -1,14 +1,12 @@
 OKD - 3.11
 ==========
 
-This **Vagrantfile** create 4 machines, one with the roles "master" and "infra", other two with the "node" role and another one for storage/identity purposes:
+This **Vagrantfile** create 2 machines, one with the roles "master", "infra" and "node" and another one for storage/identity purposes:
 
-| Machine             | Address       | Roles         |
-|---------------------|---------------|---------------|
-| okd.example.com     | 172.27.11.10  | master, infra |
-| node1.example.com   | 172.27.11.20  | node          |
-| node2.example.com   | 172.27.11.30  | node          |
-| extras.example.com  | 172.27.11.40  | storage, ldap |
+| Machine             | Address       | Roles               |
+|---------------------|---------------|---------------------|
+| okd.example.com     | 172.27.11.10  | master, infra, node |
+| extras.example.com  | 172.27.11.40  | storage, ldap       |
 
 Everything is installed during the provisioning stage, this means that after the provisioning step, vagrant execute these two commands:
 
@@ -24,12 +22,11 @@ NAT
 Some configurations on the inventory **`/etc/ansible/hosts`** was added to overcome problems with default NAT interface that vagrant creates:
 
  - etcd_ip
- - openshift_public_ip
- - openshift_public_hostname
 
 Disabled Services
 -----------------
 
+ - openshift_metrics_install_metrics
  - openshift_logging_install_logging
  - openshift_enable_olm
  - openshift_enable_service_catalog
@@ -40,8 +37,8 @@ Requirements
 ------------
 
 From a software point of view, you will need a least **VirtualBox**.
-From a hardware point of view, each machine uses 2 cpu cores, unless the storage one. The master is configured to use 6GiB of RAM, the node ones 2GiB and the storage 256MiB, so you will need at least 11GiB of RAM, or even less if you lower the memory of each vm.
-If you disable the **`openshift_metrics_install_metrics`** you can lower the memory from 6GiB to ~2GiB on master, and each node to 1GiB.
+From a hardware point of view, the **master** uses 2 cpu cores, and the **extras** only 1 core. The master is configured to use 4GiB of RAM and the storage 256MiB, so you will need at least 5GiB of **free** RAM.
+If you are willing to install the **metrics** you'll need at least 6GiB of **free** RAM.
 
 Installation
 ------------
@@ -58,27 +55,3 @@ Remeber to access the address [https://hawkular-metrics.172-27-11-10.nip.io](htt
 
 And then access the address [https://okd.example.com:8443](https://okd.example.com:8443).
 The **username** and **password** are **developer** and **4linux**.
-
-Dynamic Provisioning
---------------------
-
-There is a [GlusterFS](https://www.gluster.org/) service for dynamic `PersistentVolume` creating. This service uses a 10GB raw file located in `/disk.img` on **extras** machine as LVM. The GlusterFS service create a volume with 2GiB for its own use.
-
-That means you can create a maximum of 7 volumes of 1GiB each, or another combination that don't exceed 7GiB.
-
-The `StorageClass` for GlusterFS that works is **glusterfs-storage**, the block one isn't working yet:
-
-```
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql
-  namespace: okd
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: glusterfs-storage
-```
