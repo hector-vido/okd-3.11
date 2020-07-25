@@ -9,7 +9,7 @@ docker_version="ce"
 openshift_enable_olm=false
 openshift_deployment_type=origin
 openshift_enable_service_catalog=false
-openshift_metrics_install_metrics=true
+openshift_metrics_install_metrics=false
 openshift_logging_install_logging=false
 openshift_cluster_monitoring_operator_install=false
 openshift_master_default_subdomain='172-27-11-10.nip.io'
@@ -24,6 +24,4 @@ okd.example.com openshift_public_ip='172.27.11.10' openshift_public_hostname='ok
 okd.example.com etcd_ip='172.27.11.10'
 
 [nodes]
-okd.example.com openshift_node_group_name='node-config-master-infra'
-node1.example.com openshift_node_group_name='node-config-compute' 
-node2.example.com openshift_node_group_name='node-config-compute' 
+okd.example.com openshift_node_group_name='node-config-all-in-one'

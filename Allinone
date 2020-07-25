@@ -2,10 +2,8 @@
 # vi: set ft=ruby :
 
 vms = {
-  'node1' => {'memory' => '2048', 'cpus' => 2, 'ip' => '20', 'host' => 'node1', 'provision' => 'node.sh'},
-  'node2' => {'memory' => '2048', 'cpus' => 2, 'ip' => '30', 'host' => 'node2', 'provision' => 'node.sh'},
   'extras' => {'memory' => '256', 'cpus' => 1, 'ip' => '40', 'host' => 'extras', 'provision' => 'extras.sh'},
-  'master' => {'memory' => '6144', 'cpus' => 4, 'ip' => '10', 'host' => 'okd', 'provision' => 'master.sh'}
+  'master' => {'memory' => '4096', 'cpus' => 4, 'ip' => '10', 'host' => 'okd', 'provision' => 'allinone.sh'}
 }
 
 Vagrant.configure('2') do |config|
