@@ -17,7 +17,7 @@ openshift_docker_options='--selinux-enabled --log-driver=journald --signature-ve
 openshift_master_identity_providers=[{'name': 'HTPASSWD', 'challenge': 'true', 'login': 'true', 'kind':'HTPasswdPasswordIdentityProvider', 'mappingMethod': 'claim'}]
 
 [masters]
-okd.example.com openshift_ip='172.27.11.10' openshift_public_ip='172.27.11.10' openshift_public_hostname='okd.example.com'
+okd.example.com openshift_public_ip='172.27.11.10' openshift_public_hostname='okd.example.com'
 
 [etcd]
 okd.example.com etcd_ip='172.27.11.10'

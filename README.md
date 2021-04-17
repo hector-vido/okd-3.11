@@ -24,7 +24,6 @@ NAT
 Some configurations on the inventory **`/etc/ansible/hosts`** was added to overcome problems with default NAT interface that vagrant creates:
 
  - etcd_ip
- - openshift_ip
  - openshift_public_ip
  - openshift_public_hostname
 
