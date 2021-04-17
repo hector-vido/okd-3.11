@@ -5,7 +5,6 @@ etcd
 
 [OSEv3:vars]
 ansible_ssh_user=root
-docker_version="ce"
 openshift_enable_olm=false
 openshift_deployment_type=origin
 openshift_enable_service_catalog=false
@@ -13,12 +12,12 @@ openshift_metrics_install_metrics=true
 openshift_logging_install_logging=false
 openshift_cluster_monitoring_operator_install=false
 openshift_master_default_subdomain='172-27-11-10.nip.io'
-openshift_disable_check='disk_availability,memory_availability,docker_storage,package_availability'
+openshift_disable_check='disk_availability,memory_availability,docker_storage'
 openshift_docker_options='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry=172.30.0.0/16 --exec-opt native.cgroupdriver=systemd'
 openshift_master_identity_providers=[{'name': 'HTPASSWD', 'challenge': 'true', 'login': 'true', 'kind':'HTPasswdPasswordIdentityProvider', 'mappingMethod': 'claim'}]
 
 [masters]
-okd.example.com openshift_public_ip='172.27.11.10' openshift_public_hostname='okd.example.com'
+okd.example.com openshift_ip='172.27.11.10' openshift_public_ip='172.27.11.10' openshift_public_hostname='okd.example.com'
 
 [etcd]
 okd.example.com etcd_ip='172.27.11.10'

@@ -24,6 +24,7 @@ NAT
 Some configurations on the inventory **`/etc/ansible/hosts`** was added to overcome problems with default NAT interface that vagrant creates:
 
  - etcd_ip
+ - openshift_ip
  - openshift_public_ip
  - openshift_public_hostname
 
@@ -53,6 +54,8 @@ This takes a lot of time, just go to the cloned folder and type:
 If you want to access the **webconsole** and/or see metrics you can add the hostnames and ip address on **/etc/hosts**:
 
 	echo '172.27.11.10 okd.example.com' | sudo tee -a /etc/hosts
+
+> On Windows you should modify `c:\Windows\System32\Drivers\etc\hosts`
 
 Remeber to access the address [https://hawkular-metrics.172-27-11-10.nip.io](https://hawkular-metrics.172-27-11-10.nip.io) and accept the self-signed certificate.
 
